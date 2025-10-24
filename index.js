@@ -260,12 +260,15 @@ async function connectToWA() {
       const _0x222bfb = _0x4b9a40.key.remoteJid;
       const _0x545eb6 = _0x2f304f == "extendedTextMessage" && _0x4b9a40.message.extendedTextMessage.contextInfo != null ? _0x4b9a40.message.extendedTextMessage.contextInfo.quotedMessage || [] : [];
       const _0x267454 = _0x2f304f === 'conversation' ? _0x4b9a40.message.conversation : _0x2f304f === "extendedTextMessage" && _0x4b9a40.message.extendedTextMessage?.['contextInfo']?.['quotedMessage'] && (await _0x113cf5(_0x4b9a40.message.extendedTextMessage.contextInfo.stanzaId)) ? await _0x1ec342(await _0x17f45b(_0x4b9a40.message.extendedTextMessage.contextInfo.stanzaId), _0x4b9a40.message.extendedTextMessage.text) : _0x2f304f === "extendedTextMessage" ? _0x4b9a40.message.extendedTextMessage.text : _0x2f304f === "templateButtonReplyMessage" ? _0x4b9a40.message.templateButtonReplyMessage?.['selectedId'] : _0x2f304f === 'interactiveResponseMessage' ? (() => {
-        try {
-          const _0x3e87f7 = JSON.parse(_0x4b9a40.message.interactiveResponseMessage?.["nativeFlowResponseMessage"]?.['paramsJson']);
-          return _0x3e87f7?.['id'] || '';
-        } catch {
-          return '';
-        }
+       try {
+     const json = _0x4b9a40?.message?.interactiveResponseMessage?.nativeFlowResponseMessage?.paramsJson;
+     if (!json) return '';
+     const parsed = JSON.parse(json);
+     return parsed?.id || '';
+   } catch (err) {
+     console.warn('Failed to parse interactive response message:', err);
+     return '';
+       }
       })() : _0x2f304f === "imageMessage" && _0x4b9a40.message.imageMessage?.['caption'] ? _0x4b9a40.message.imageMessage.caption : _0x2f304f === "videoMessage" && _0x4b9a40.message.videoMessage?.["caption"] ? _0x4b9a40.message.videoMessage.caption : _0x43833d.msg?.['text'] || _0x43833d.msg?.["conversation"] || _0x43833d.msg?.["caption"] || _0x43833d.message?.["conversation"] || _0x43833d.msg?.["selectedButtonId"] || _0x43833d.msg?.['singleSelectReply']?.["selectedRowId"] || _0x43833d.msg?.["selectedId"] || _0x43833d.msg?.['contentText'] || _0x43833d.msg?.["selectedDisplayText"] || _0x43833d.msg?.["title"] || _0x43833d.msg?.["name"] || '';
       const _0x190cff = config.PREFIX;
       const _0x12771f = _0x267454.startsWith(_0x190cff);
