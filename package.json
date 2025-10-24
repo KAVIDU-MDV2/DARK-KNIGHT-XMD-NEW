@@ -1,6 +1,6 @@
 {
   "name": "DARK-MD",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "start": "pm2 start index.js --deep-monitoring --attach --name DARK-MD",
     "stop": "pm2 stop DARK-MD",
